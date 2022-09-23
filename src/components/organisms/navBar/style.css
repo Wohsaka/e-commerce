@@ -1,0 +1,82 @@
+.nav-bar-container {
+  background-color: #fffff2;
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.button-container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 30vw;
+  height: 100%;
+}
+
+.auth {
+  text-decoration: none;
+  font-size: 20px;
+  background-color: transparent;
+  border-color: transparent;
+  border-width: 0px;
+  transition: all 0.5s ease-in-out;
+  padding: 0 0.5em;
+  margin: 0 10px;
+  color: var(--orange);
+}
+
+.auth:hover {
+  filter: brightness(1.3);
+}
+
+.logo-container {
+  padding-top: 0.5em;
+  position: fixed;
+  left: 30vw;
+}
+
+.logo {
+  padding-top: 0.5em;
+}
+
+.nav-bar {
+  width: 100vw;
+  text-align: right;
+}
+
+/* New Styles for MUI components*/
+
+.nav-bar-button {
+  background-color: var(--white) !important;
+  color: var(--orange) !important;
+  margin: 0 0.5em !important;
+}
+
+.nav-bar-button:hover {
+  background-color: var(--orange) !important;
+  color: var(--white) !important;
+}
+
+.nav-bar-button-active {
+  border-bottom: 3px solid var(--orange) !important;
+}
+
+@media screen and (min-width: 768px) {
+  .logo-container {
+    position: static;
+    margin-right: auto;
+  }
+
+  .nav-bar {
+    width: auto;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .logo-container {
+    margin-left: auto;
+    margin-right: 12em;
+  }
+}

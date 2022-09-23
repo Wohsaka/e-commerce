@@ -1,0 +1,34 @@
+[
+  {
+    "productName": "Dog Food Premium 8kg",
+    "productPrice": "20",
+    "category": "Food",
+    "productId": "DF01",
+    "productImg": "https://happydog_en_sb.cstatic.io/440x440/f/69110/480x480/c90b13149a/hd-vet-new-product-slider-packshots-sensible-11kg-300g.png",
+    "productDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate aut nobis est officiis culpa sapiente? Illum suscipit, explicabo qui consectetur corrupti reprehenderit repellendus perspiciatis ab at dicta obcaecati facere excepturi? Dicta deserunt totam alias magnam. Optio numquam ut explicabo, provident repellat voluptatibus."
+  },
+  {
+    "productName": "Cat Food",
+    "productPrice": "100",
+    "category": "Food",
+    "productId": "CF01",
+    "productImg": "https://m.media-amazon.com/images/I/61tJAIhYFYL._SX466_.jpg",
+    "productDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate aut nobis est officiis culpa sapiente? Illum suscipit, explicabo qui consectetur corrupti reprehenderit repellendus perspiciatis ab at dicta obcaecati facere excepturi? Dicta deserunt totam alias magnam. Optio numquam ut explicabo, provident repellat voluptatibus."
+  },
+  {
+    "productName": "Ball for pets",
+    "productPrice": "5",
+    "category": "Toys",
+    "productId": "T01",
+    "productImg": "https://s7d5.scene7.com/is/image/PetsUnited/T403643_P",
+    "productDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate aut nobis est officiis culpa sapiente? Illum suscipit, explicabo qui consectetur corrupti reprehenderit repellendus perspiciatis ab at dicta obcaecati facere excepturi? Dicta deserunt totam alias magnam. Optio numquam ut explicabo, provident repellat voluptatibus."
+  },
+  {
+    "productName": "Dog Bed",
+    "productPrice": "50",
+    "category": "Beds",
+    "productId": "DB01",
+    "productImg": "https://www.costco.co.uk/medias/sys_master/images/h0c/h16/101627202240542.jpg",
+    "productDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate aut nobis est officiis culpa sapiente? Illum suscipit, explicabo qui consectetur corrupti reprehenderit repellendus perspiciatis ab at dicta obcaecati facere excepturi? Dicta deserunt totam alias magnam. Optio numquam ut explicabo, provident repellat voluptatibus."
+  }
+]

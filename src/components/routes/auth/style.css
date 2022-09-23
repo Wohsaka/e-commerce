@@ -1,0 +1,56 @@
+.auth-route {
+  height: auto !important;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  padding-top: 20vh;
+  margin: 0;
+}
+
+.auth-container {
+  height: 50vh;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--white);
+  border-radius: 5px;
+}
+
+.auth-container-title {
+  padding-top: 1em;
+}
+
+.inputs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em 0;
+}
+
+.auth-sign-up-button {
+  background-color: var(--orange) !important;
+  color: #ffff !important;
+  width: 50%;
+  margin-bottom: 1.5em !important;
+}
+
+.auth-switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  .auth-container {
+    width: 50%;
+    height: 35vh;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .auth-container {
+    width: 25%;
+    height: 50vh;
+  }
+}
