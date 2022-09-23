@@ -1,0 +1,71 @@
+.search-bar-container {
+  background-color: var(--white);
+  display: flex;
+  height: 8vh;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid var(--blue);
+  padding-top: 1em;
+}
+
+.show-categories {
+  background-color: var(--white);
+  font-size: 1.1rem;
+  text-align: center;
+  padding-top: 0.2rem;
+  padding-bottom: 0.5rem;
+  color: var(--blue);
+}
+
+/* MUI Styles */
+
+.drawer-title {
+  padding: 0.5em 0;
+  color: #e37b64;
+}
+
+.search-button {
+  background-color: var(--orange) !important;
+  color: var(--white) !important;
+  font-size: 0.7em !important;
+}
+
+.filter-search-bar {
+  margin-right: 1em !important;
+  width: 50% !important;
+  padding: 0em !important;
+}
+
+.filter-category-button {
+  color: var(--orange) !important;
+  text-align: center !important;
+}
+
+.filter-category-button:hover {
+  background-color: var(--orange) !important;
+  color: #ffff !important;
+}
+
+.filter-category-button-active {
+  background-color: var(--orange) !important;
+  color: #ffff !important;
+  text-align: center !important;
+}
+
+@media screen and (min-width: 768px) {
+  .filter-container {
+    margin-top: 4em;
+    position: fixed;
+    width: 34vw;
+  }
+
+  .search-bar-container {
+    padding-top: 2em;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .filter-container {
+    width: 24vw;
+  }
+}

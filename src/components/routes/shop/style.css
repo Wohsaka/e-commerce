@@ -1,0 +1,25 @@
+.shop-container {
+  padding-top: 7.5vh;
+}
+
+@media screen and (min-width: 768px) {
+  .shop-container {
+    padding-top: 0vh;
+  }
+
+  .shop-filter-products-container {
+    display: flex;
+    padding: 0 2rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .shop-container {
+    padding-top: 0vh;
+  }
+
+  .shop-filter-products-container {
+    display: flex;
+    padding: 0 2rem;
+  }
+}
