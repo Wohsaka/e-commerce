@@ -38,14 +38,12 @@ const Auth = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user
-        dispatch(userLoggedIn())
+        dispatch(userLoggedIn(user.email))
         navigate('/Shop', { replace: true })
         setEmail('')
         setPassword('')
       })
       .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
         alert(error.message)
       })
   }
@@ -55,14 +53,12 @@ const Auth = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user
-        dispatch(userLoggedIn())
+        dispatch(userLoggedIn(user.email))
         navigate('/Shop', { replace: true })
         setEmail('')
         setPassword('')
       })
       .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
         alert(error.message)
       })
   }

@@ -1,0 +1,70 @@
+.shopping-record-container {
+  padding: 0 1em;
+  padding-top: 9vh;
+}
+
+.shopping-record-title-container {
+  text-align: center;
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 0.5em;
+}
+
+/*Table style*/
+.shopping-record-table {
+  margin-top: 1em;
+  min-height: 70vh;
+}
+
+.page-control-container {
+  display: flex;
+  background-color: #fff;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  margin-bottom: 2em;
+}
+
+.actual-page-container {
+  background-color: #0001;
+  padding: 0.1em 0.8em;
+  border-radius: 4px;
+}
+
+.empty-record-container {
+  text-align: center;
+  color: #0007;
+}
+
+@media screen and (min-width: 768px) {
+  .shopping-record-container {
+    padding-top: 15vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .shopping-record-table-container {
+    width: 80%;
+    margin-left: 10%;
+  }
+
+  .shopping-record-title-container {
+    padding: 0.5em 0;
+    margin-left: 10%;
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .shopping-record-table-container {
+    width: 55%;
+    margin-left: 22.5%;
+  }
+
+  .shopping-record-title-container {
+    padding: 0.5em 0;
+    width: 55%;
+    margin-left: 22.5%;
+  }
+}

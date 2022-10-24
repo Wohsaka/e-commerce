@@ -5,8 +5,7 @@ import React, { useState, useEffect } from 'react'
 import { fetchInventory } from '../../../redux/slices/inventory/inventorySlice'
 import { addToCart } from '../../../redux/slices/cart/cartSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import { Snackbar, IconButton, Alert } from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close'
+import CustomSnackbar from '../../customSnackbar/CustomSnackbar'
 
 const Shop = () => {
   const [showCategories, setShowCategories] = useState(false)
@@ -19,26 +18,6 @@ const Shop = () => {
   //Redux
   const isLogged = useSelector((state) => state.user.isLogged)
   const dispatch = useDispatch()
-
-  const closeSnackbar = (event, reason) => {
-    if (reason === 'clickaway') {
-      return
-    }
-    setOpenSnackbar(false)
-  }
-
-  const snackbarAction = (
-    <React.Fragment>
-      <IconButton
-        size='small'
-        aria-label='close'
-        color='inherit'
-        onClick={closeSnackbar}
-      >
-        <CloseIcon fontSize='small' />
-      </IconButton>
-    </React.Fragment>
-  )
 
   const handleAddToCart = (item) => {
     if (isLogged) {
@@ -108,21 +87,11 @@ const Shop = () => {
           handleAddToCart={handleAddToCart}
         />
       </div>
-      <Snackbar
+      <CustomSnackbar
         open={openSnackbar}
-        autoHideDuration={2000}
-        onClose={closeSnackbar}
-        action={snackbarAction}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-      >
-        <Alert
-          onClose={closeSnackbar}
-          severity='success'
-          sx={{ width: '100%' }}
-        >
-          Item added to your cart!
-        </Alert>
-      </Snackbar>
+        text='Item added to your cart!'
+        setOpen={setOpenSnackbar}
+      />
     </div>
   )
 }

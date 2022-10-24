@@ -45,6 +45,7 @@ const NavBar = (props) => {
     'About',
     'Cart',
     isLogged ? 'Log out' : 'Log in/Sign Up',
+    isLogged ? 'Shopping History' : null,
   ]
 
   const handleLogOut = () => {

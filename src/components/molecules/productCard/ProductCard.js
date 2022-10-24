@@ -44,7 +44,6 @@ const ProductCard = (props) => {
 
   return (
     <Card
-      injectFirst
       className='product-card'
       sx={{ maxWidth: 345, width: 300, margin: '1em 0' }}
     >

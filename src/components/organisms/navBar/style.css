@@ -76,7 +76,11 @@
 
 @media screen and (min-width: 1280px) {
   .logo-container {
-    margin-left: auto;
-    margin-right: 12em;
+    margin-right: auto;
+    margin-left: 10em;
+  }
+
+  .nav-bar {
+    margin-right: 10em;
   }
 }
