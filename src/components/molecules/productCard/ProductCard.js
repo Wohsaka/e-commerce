@@ -44,8 +44,8 @@ const ProductCard = (props) => {
 
   return (
     <Card
-      injectFirst
       className='product-card'
+      variant='elevation'
       sx={{ maxWidth: 345, width: 300, margin: '1em 0' }}
     >
       <CardMedia

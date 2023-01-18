@@ -8,16 +8,57 @@ import {
   ListItem,
   ListItemButton,
   ImageListItem,
+  Backdrop,
+  CircularProgress,
 } from '@mui/material'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import './style.css'
+import CustomSnackbar from '../../customSnackbar/CustomSnackbar'
 import { useDispatch, useSelector } from 'react-redux'
-import { addOne, minusOne } from '../../../redux/slices/cart/cartSlice'
+import {
+  addOne,
+  minusOne,
+  resetCart,
+} from '../../../redux/slices/cart/cartSlice'
+import API_URL from '../../../api/apiUrl'
+const axios = require('axios').default
 
 const Cart = () => {
   const dispatch = useDispatch()
-  const items = useSelector((state) => state.cart.items)
-  const total = useSelector((state) => state.cart.total)
+  const { items, total } = useSelector((state) => state.cart)
+  const { isLogged, email, accessToken } = useSelector((state) => state.user)
+  const [openBackdrop, setOpenBackdrop] = React.useState(false)
+  const [openSnackbar, setOpenSnackbar] = React.useState(false)
+
+  const recordPucharse = async () => {
+    if (isLogged) {
+      setOpenBackdrop(true)
+      const pucharse = {
+        email: email,
+        total: total,
+        items: items,
+      }
+      //Store pucharse in database
+      try {
+        const config = {
+          headers: {
+            authorization: accessToken,
+          },
+        }
+        await axios.post(API_URL + '/pucharses', pucharse, config)
+        dispatch(resetCart())
+        setOpenBackdrop(false)
+        setOpenSnackbar(true)
+      } catch (error) {
+        dispatch(resetCart())
+        setOpenBackdrop(false)
+        alert(error.message)
+        console.log(error)
+      }
+    } else {
+      alert('You must be logged in to acces this feature!')
+    }
+  }
 
   useEffect(() => {}, [])
 
@@ -95,14 +136,23 @@ const Cart = () => {
           <Button
             size='large'
             className='cart-confirm-payment-button'
-            onClick={() =>
-              alert("We're sorry, this feature is unavailable right now.")
-            }
+            onClick={recordPucharse}
           >
             Confirm payment <ArrowForwardIcon />
           </Button>
         </Box>
       </Box>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={openBackdrop}
+      >
+        <CircularProgress color='warning' />
+      </Backdrop>
+      <CustomSnackbar
+        open={openSnackbar}
+        text='Satisfactory purchase!'
+        setOpen={setOpenSnackbar}
+      />
     </Box>
   )
 }

@@ -1,5 +1,6 @@
 .about-container {
   padding-top: 7em;
+  background-color: var(--blue);
 }
 
 .about-title-container {

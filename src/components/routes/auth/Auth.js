@@ -1,28 +1,11 @@
 import React from 'react'
 import './style.css'
 import { Box, TextField, Typography, Button } from '@mui/material'
-import { initializeApp } from 'firebase/app'
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from 'firebase/auth'
 import { userLoggedIn } from '../../../redux/slices/user/userSlice'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyD3mMTAK_FPQSvUW8SQ9sgVUchhl60QWEI',
-  authDomain: 'e-commerce-95ec0.firebaseapp.com',
-  projectId: 'e-commerce-95ec0',
-  storageBucket: 'e-commerce-95ec0.appspot.com',
-  messagingSenderId: '423491911419',
-  appId: '1:423491911419:web:2fc906ccef3da115b83a5e',
-}
-
-//firebase
-const app = initializeApp(firebaseConfig)
-export const auth = getAuth(app)
+import API_URL from '../../../api/apiUrl'
+const axios = require('axios').default
 
 const Auth = () => {
   const [email, setEmail] = React.useState('')
@@ -33,38 +16,46 @@ const Auth = () => {
   //Redux
   const dispatch = useDispatch()
 
-  const signUp = () => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user
-        dispatch(userLoggedIn())
-        navigate('/Shop', { replace: true })
-        setEmail('')
-        setPassword('')
+  const signUp = async () => {
+    try {
+      const { data } = await axios.post(API_URL + '/users', {
+        email,
+        password,
       })
-      .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        alert(error.message)
-      })
+      if (!data.success) {
+        alert(data.message)
+        console.log(data.message)
+        return
+      }
+      dispatch(userLoggedIn({ email, accessToken: data.data.accessToken }))
+      navigate('/Shop', { replace: true })
+      setEmail('')
+      setPassword('')
+    } catch (error) {
+      console.log(error)
+      alert(error.message)
+    }
   }
 
-  const login = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user
-        dispatch(userLoggedIn())
-        navigate('/Shop', { replace: true })
-        setEmail('')
-        setPassword('')
+  const login = async () => {
+    try {
+      const { data } = await axios.post(API_URL + '/users/login', {
+        email,
+        password,
       })
-      .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        alert(error.message)
-      })
+      if (!data.success) {
+        alert(data.message)
+        console.log(data.message)
+        return
+      }
+      dispatch(userLoggedIn({ email, accessToken: data.data.accessToken }))
+      navigate('/Shop', { replace: true })
+      setEmail('')
+      setPassword('')
+    } catch (error) {
+      console.log(error)
+      alert(error.message)
+    }
   }
 
   const switchSignOrLog = () => {

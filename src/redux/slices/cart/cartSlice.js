@@ -57,6 +57,7 @@ export const cartSlice = createSlice({
     },
     resetCart: (state) => {
       state.items = {}
+      state.total = 0.0
     },
   },
 })

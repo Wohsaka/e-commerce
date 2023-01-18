@@ -1,0 +1,31 @@
+.detailed-pucharse-item-img {
+  width: 75px;
+}
+
+.backdrop-list-container {
+  background-color: #fff;
+  width: 90vw;
+  border-radius: 5px;
+}
+
+.backdrop-list-item-text {
+  color: #000;
+  margin-left: 1em;
+}
+
+.backdrop-list-total-text {
+  color: var(--orange);
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .backdrop-list-container {
+    width: 60vw;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .backdrop-list-container {
+    width: 40vw;
+  }
+}

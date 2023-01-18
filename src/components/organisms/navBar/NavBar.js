@@ -14,9 +14,7 @@ import Toolbar from '@mui/material/Toolbar'
 import Button from '@mui/material/Button'
 import MenuIcon from '@mui/icons-material/Menu'
 import { useNavigate } from 'react-router-dom'
-import { auth } from '../../routes/auth/Auth'
 import { useSelector, useDispatch } from 'react-redux'
-import { signOut } from 'firebase/auth'
 import { userLoggedOut } from '../../../redux/slices/user/userSlice'
 import { resetCart } from '../../../redux/slices/cart/cartSlice'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
@@ -46,12 +44,11 @@ const NavBar = (props) => {
     'Cart',
     isLogged ? 'Log out' : 'Log in/Sign Up',
   ]
+  isLogged && navItems.push('Shopping History')
 
   const handleLogOut = () => {
     dispatch(resetCart())
-    signOut(auth).then(() => {
-      dispatch(userLoggedOut())
-    })
+    dispatch(userLoggedOut())
   }
 
   const handleDrawerToggle = () => {
