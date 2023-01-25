@@ -17,17 +17,6 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { userLoggedOut } from '../../../redux/slices/user/userSlice'
 import { resetCart } from '../../../redux/slices/cart/cartSlice'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-
-const theme = createTheme({
-  breakpoints: {
-    values: {
-      mobile: 0,
-      tablet: 768,
-      desktop: 1280,
-    },
-  },
-})
 
 const NavBar = (props) => {
   const { window } = props
@@ -98,73 +87,69 @@ const NavBar = (props) => {
     window !== undefined ? () => window().document.body : undefined
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box sx={{ display: 'flex' }}>
-        <AppBar component='nav' sx={{ bgcolor: '#fffff2' }}>
-          <Toolbar>
-            <IconButton
-              color='inherit'
-              aria-label='open drawer'
-              edge='start'
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { tablet: 'none' } }}
+    <Box sx={{ display: 'flex' }}>
+      <AppBar component='nav' sx={{ bgcolor: '#fffefe' }}>
+        <Toolbar>
+          <IconButton
+            color='inherit'
+            aria-label='open drawer'
+            edge='start'
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { tablet: 'none' } }}
+          >
+            <MenuIcon sx={{ color: '#e37b64' }} />
+          </IconButton>
+          <div className='logo-container'>
+            <Button
+              variant='text'
+              onClick={() => navigate('/', { replace: true })}
             >
-              <MenuIcon sx={{ color: '#e37b64' }} />
-            </IconButton>
-            <div className='logo-container'>
-              <Button
-                variant='text'
-                onClick={() => navigate('/', { replace: true })}
-              >
-                <img src={logo} alt='logo' width={130} height={45} />
-              </Button>
-            </div>
-            <Box
-              className='nav-bar'
-              sx={{
-                display: { mobile: 'none', tablet: 'block' },
-              }}
-            >
-              {navItems.map((item) => (
-                <Button
-                  key={item}
-                  className='nav-bar-button'
-                  onClick={
-                    item === 'Log out'
-                      ? handleLogOut
-                      : () => handleNavigate(item)
-                  }
-                  id={item}
-                >
-                  {item}
-                </Button>
-              ))}
-            </Box>
-          </Toolbar>
-        </AppBar>
-        <Box component='nav'>
-          <Drawer
-            container={container}
-            variant='temporary'
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
+              <img src={logo} alt='logo' width={130} height={45} />
+            </Button>
+          </div>
+          <Box
+            className='nav-bar'
             sx={{
-              display: { mobile: 'block', tablet: 'none' },
-              '& .MuiDrawer-paper': {
-                boxSizing: 'border-box',
-                width: drawerWidth,
-                bgcolor: '#fffff2',
-              },
+              display: { mobile: 'none', tablet: 'block' },
             }}
           >
-            {drawer}
-          </Drawer>
-        </Box>
+            {navItems.map((item) => (
+              <Button
+                key={item}
+                className='nav-bar-button'
+                onClick={
+                  item === 'Log out' ? handleLogOut : () => handleNavigate(item)
+                }
+                id={item}
+              >
+                {item}
+              </Button>
+            ))}
+          </Box>
+        </Toolbar>
+      </AppBar>
+      <Box component='nav'>
+        <Drawer
+          container={container}
+          variant='temporary'
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { mobile: 'block', tablet: 'none' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+              bgcolor: '#fffefe',
+            },
+          }}
+        >
+          {drawer}
+        </Drawer>
       </Box>
-    </ThemeProvider>
+    </Box>
   )
 }
 

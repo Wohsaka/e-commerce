@@ -46,19 +46,27 @@ const ProductCard = (props) => {
     <Card
       className='product-card'
       variant='elevation'
-      sx={{ maxWidth: 345, width: 300, margin: '1em 0' }}
+      sx={{ width: { tablet: '200px', mobile: '250px' }, margin: '1em 0' }}
     >
       <CardMedia
         component='img'
-        height='250'
+        sx={{
+          width: { tablet: '150px', mobile: '185px' },
+          height: { tablet: '150px', mobile: '185px' },
+          marginLeft: { tablet: '25px', mobile: '32px' },
+        }}
         image={props.productImg}
         alt={props.productName}
       />
-      <CardContent>
-        <Typography gutterBottom variant='h5' component='div'>
+      <CardContent sx={{ paddingBottom: 0, paddingTop: '8px' }}>
+        <Typography gutterBottom variant='h6' component='div'>
           {props.productPrice}$
         </Typography>
-        <Typography variant='h6' color='text.secondary'>
+        <Typography
+          variant='h7'
+          color='text.secondary'
+          sx={{ display: 'block' }}
+        >
           {props.productName}
         </Typography>
         <Collapse in={expanded} timeout='auto' unmountOnExit>
@@ -66,7 +74,11 @@ const ProductCard = (props) => {
         </Collapse>
         <Typography
           variant='button'
-          sx={{ marginLeft: '7em', fontSize: '0.8em', color: '#e37b64' }}
+          sx={{
+            marginLeft: { tablet: '3.5em', mobile: '4.5em' },
+            fontSize: '0.8em',
+            color: '#e37b64',
+          }}
         >
           See More
         </Typography>

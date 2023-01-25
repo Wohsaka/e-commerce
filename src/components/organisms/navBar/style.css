@@ -1,5 +1,5 @@
 .nav-bar-container {
-  background-color: #fffff2;
+  background-color: var(--white);
   width: 100vw;
   height: 10vh;
   display: flex;

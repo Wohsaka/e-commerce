@@ -1,5 +1,6 @@
 .shop-container {
   padding-top: 7.5vh;
+  background-color: var(--blue);
 }
 
 @media screen and (min-width: 768px) {

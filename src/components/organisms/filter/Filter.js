@@ -41,9 +41,6 @@ const Filter = (props) => {
         <div className='search-bar-container'>
           <TextField
             className='filter-search-bar'
-            label='Search'
-            color='secondary'
-            focused
             sx={{
               '& .MuiOutlinedInput-input': {
                 padding: '0.5em 1em',
@@ -60,7 +57,7 @@ const Filter = (props) => {
         <div className='show-categories'>
           <Button
             size='small'
-            sx={{ display: { tablet: 'none' }, color: '#e37b64' }}
+            sx={{ display: { desktop: 'none' }, color: '#040303' }}
             onClick={handleDrawerToggle}
           >
             Categories
@@ -68,8 +65,8 @@ const Filter = (props) => {
           <Typography
             variant='h7'
             sx={{
-              display: { mobile: 'none', tablet: 'block' },
-              color: '#e37b64',
+              display: { mobile: 'none', desktop: 'block' },
+              color: '#040303',
             }}
           >
             Categories
@@ -77,9 +74,9 @@ const Filter = (props) => {
         </div>
         <Box
           component='nav'
-          sx={{ display: { mobile: 'none', tablet: 'block' } }}
+          sx={{ display: { mobile: 'none', desktop: 'block' } }}
         >
-          <List sx={{ backgroundColor: '#fffff2', height: '100vh' }}>
+          <List sx={{ backgroundColor: '#fffefe', height: '100vh' }}>
             {categories.map((category) => (
               <ListItem key={category}>
                 <ListItemButton
@@ -108,11 +105,11 @@ const Filter = (props) => {
               keepMounted: true, // Better open performance on mobile.
             }}
             sx={{
-              display: { mobile: 'block', tablet: 'none' },
+              display: { mobile: 'block', desktop: 'none' },
               '& .MuiDrawer-paper': {
                 boxSizing: 'border-box',
                 width: '100vw',
-                bgcolor: '#fffff2',
+                bgcolor: '#fffefe',
               },
             }}
           >
