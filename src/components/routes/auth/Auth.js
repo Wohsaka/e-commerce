@@ -1,6 +1,13 @@
 import React from 'react'
 import './style.css'
-import { Box, TextField, Typography, Button } from '@mui/material'
+import {
+  Box,
+  TextField,
+  Typography,
+  Button,
+  Backdrop,
+  CircularProgress,
+} from '@mui/material'
 import { userLoggedIn } from '../../../redux/slices/user/userSlice'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -11,6 +18,7 @@ const Auth = () => {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [signOrLog, setSignOrLog] = React.useState(true)
+  const [loading, setLoading] = React.useState(false)
   let navigate = useNavigate()
 
   //Redux
@@ -18,11 +26,13 @@ const Auth = () => {
 
   const signUp = async () => {
     try {
+      setLoading(true)
       const { data } = await axios.post(API_URL + '/users', {
         email,
         password,
       })
       if (!data.success) {
+        setLoading(false)
         alert(data.message)
         console.log(data.message)
         return
@@ -31,19 +41,23 @@ const Auth = () => {
       navigate('/Shop', { replace: true })
       setEmail('')
       setPassword('')
+      setLoading(false)
     } catch (error) {
       console.log(error)
       alert(error.message)
+      setLoading(false)
     }
   }
 
   const login = async () => {
     try {
+      setLoading(true)
       const { data } = await axios.post(API_URL + '/users/login', {
         email,
         password,
       })
       if (!data.success) {
+        setLoading(false)
         alert(data.message)
         console.log(data.message)
         return
@@ -52,9 +66,11 @@ const Auth = () => {
       navigate('/Shop', { replace: true })
       setEmail('')
       setPassword('')
+      setLoading(false)
     } catch (error) {
       console.log(error)
       alert(error.message)
+      setLoading(false)
     }
   }
 
@@ -66,6 +82,12 @@ const Auth = () => {
 
   return (
     <Box className='auth-route'>
+      <Backdrop
+        sx={{ color: '#e37b64', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color='inherit' />
+      </Backdrop>
       <Box className='auth-container'>
         <Box className='auth-container-title'>
           <Typography variant='h6' sx={{ color: '#e37b64' }}>
