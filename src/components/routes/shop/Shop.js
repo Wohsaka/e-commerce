@@ -64,7 +64,6 @@ const Shop = () => {
 
   useEffect(() => {
     dispatch(fetchInventory()).then((inv) => {
-      console.log(inv.payload.data)
       setInventory(inv.payload.data)
       setFilteredProducts(inv.payload.data)
     })
