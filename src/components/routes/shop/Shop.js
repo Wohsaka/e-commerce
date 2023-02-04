@@ -64,8 +64,9 @@ const Shop = () => {
 
   useEffect(() => {
     dispatch(fetchInventory()).then((inv) => {
-      setInventory(inv.payload)
-      setFilteredProducts(inv.payload)
+      console.log(inv.payload.data)
+      setInventory(inv.payload.data)
+      setFilteredProducts(inv.payload.data)
     })
     if (window.innerWidth >= 768) {
       setShowCategories(true)

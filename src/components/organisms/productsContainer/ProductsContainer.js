@@ -8,11 +8,11 @@ const ProductsContainer = (props) => {
       {props.products.map((product) => {
         return (
           <ProductCard
-            productImg={product.productImg}
-            productName={product.productName}
-            productPrice={product.productPrice}
-            productId={product.productId}
-            productDescription={product.productDescription}
+            productImg={product.product_Img}
+            productName={product.product_Name}
+            productPrice={product.product_Price}
+            productId={product.product_Id}
+            productDescription={product.product_Description}
             onAddToCart={props.handleAddToCart}
           />
         )
