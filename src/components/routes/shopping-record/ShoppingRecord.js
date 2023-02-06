@@ -33,7 +33,7 @@ const ShoppingRecord = () => {
         },
       }
       await axios
-        .get(process.API_URL + '/pucharses/' + email, config)
+        .get(process.env.REACT_APP_API_URL + '/pucharses/' + email, config)
         .then((response) => {
           if (response.data.data.pucharses.length > 0) {
             for (

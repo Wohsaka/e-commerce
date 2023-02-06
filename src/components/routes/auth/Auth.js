@@ -26,10 +26,13 @@ const Auth = () => {
   const signUp = async () => {
     try {
       setLoading(true)
-      const { data } = await axios.post(process.API_URL + '/users', {
-        email,
-        password,
-      })
+      const { data } = await axios.post(
+        process.env.REACT_APP_API_URL + '/users',
+        {
+          email,
+          password,
+        }
+      )
       if (!data.success) {
         setLoading(false)
         alert(data.message)
@@ -51,10 +54,13 @@ const Auth = () => {
   const login = async () => {
     try {
       setLoading(true)
-      const { data } = await axios.post(API_URL + '/users/login', {
-        email,
-        password,
-      })
+      const { data } = await axios.post(
+        process.env.REACT_APP_API_URL + '/users/login',
+        {
+          email,
+          password,
+        }
+      )
       if (!data.success) {
         setLoading(false)
         alert(data.message)

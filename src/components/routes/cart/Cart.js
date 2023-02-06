@@ -44,7 +44,11 @@ const Cart = () => {
             authorization: accessToken,
           },
         }
-        await axios.post(process.API_URL + '/pucharses', pucharse, config)
+        await axios.post(
+          process.env.REACT_APP_API_URL + '/pucharses',
+          pucharse,
+          config
+        )
         dispatch(resetCart())
         setOpenBackdrop(false)
         setOpenSnackbar(true)

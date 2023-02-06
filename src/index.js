@@ -1,4 +1,3 @@
-require('dotenv').config()
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
@@ -14,6 +13,8 @@ import { Routes, Route, HashRouter } from 'react-router-dom'
 import store from './redux/store'
 import { Provider } from 'react-redux'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+require('dotenv').config()
+console.log(process.env.REACT_APP_API_URL)
 
 const theme = createTheme({
   breakpoints: {
