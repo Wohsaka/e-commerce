@@ -6,7 +6,6 @@ const ProductsContainer = (props) => {
   return (
     <div className='products-container'>
       {props.products.map((product) => {
-        console.log(product)
         return (
           <ProductCard
             productImg={product.product_img}
