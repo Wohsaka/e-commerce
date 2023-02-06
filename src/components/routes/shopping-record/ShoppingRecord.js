@@ -4,7 +4,6 @@ import * as React from 'react'
 import './style.css'
 import { useSelector } from 'react-redux'
 import CustomTable from '../../customTable/CustomTable'
-import API_URL from '../../../api/apiUrl'
 const axios = require('axios').default
 
 const ShoppingRecord = () => {
@@ -34,7 +33,7 @@ const ShoppingRecord = () => {
         },
       }
       await axios
-        .get(API_URL + '/pucharses/' + email, config)
+        .get(process.API_URL + '/pucharses/' + email, config)
         .then((response) => {
           if (response.data.data.pucharses.length > 0) {
             for (

@@ -20,7 +20,6 @@ import {
   minusOne,
   resetCart,
 } from '../../../redux/slices/cart/cartSlice'
-import API_URL from '../../../api/apiUrl'
 const axios = require('axios').default
 
 const Cart = () => {
@@ -45,7 +44,7 @@ const Cart = () => {
             authorization: accessToken,
           },
         }
-        await axios.post(API_URL + '/pucharses', pucharse, config)
+        await axios.post(process.API_URL + '/pucharses', pucharse, config)
         dispatch(resetCart())
         setOpenBackdrop(false)
         setOpenSnackbar(true)

@@ -11,7 +11,6 @@ import {
 import { userLoggedIn } from '../../../redux/slices/user/userSlice'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import API_URL from '../../../api/apiUrl'
 const axios = require('axios').default
 
 const Auth = () => {
@@ -27,7 +26,7 @@ const Auth = () => {
   const signUp = async () => {
     try {
       setLoading(true)
-      const { data } = await axios.post(API_URL + '/users', {
+      const { data } = await axios.post(process.API_URL + '/users', {
         email,
         password,
       })
