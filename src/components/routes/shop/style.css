@@ -3,6 +3,18 @@
   background-color: var(--blue);
 }
 
+.shop-no-results-container {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 60vh;
+  margin-left: 10%;
+  margin-top: 2em;
+  background-color: var(--white);
+}
+
 @media screen and (min-width: 768px) {
   .shop-container {
     padding-top: 0vh;
@@ -11,6 +23,10 @@
   .shop-filter-products-container {
     display: flex;
     padding: 0 2rem;
+  }
+
+  .shop-no-results-container {
+    margin-top: 15em;
   }
 }
 
@@ -22,5 +38,12 @@
   .shop-filter-products-container {
     display: flex;
     padding: 0 2rem;
+  }
+
+  .shop-no-results-container {
+    position: absolute;
+    right: 10vw;
+    bottom: 15vh;
+    width: 60%;
   }
 }

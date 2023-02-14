@@ -8,6 +8,7 @@ const ProductsContainer = (props) => {
       {props.products.map((product) => {
         return (
           <ProductCard
+            key={product.product_id}
             productImg={product.product_img}
             productName={product.product_name}
             productPrice={product.product_price}

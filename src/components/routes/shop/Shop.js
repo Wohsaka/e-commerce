@@ -28,20 +28,37 @@ const Shop = () => {
     }
   }
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (lastCategory !== '') {
       const lastClicked = document.getElementById(lastCategory)
       lastClicked.classList.remove('filter-category-button-active')
       lastClicked.classList.add('filter-category-button')
     }
-    const newArray = inventory.filter((item) => {
-      return item.productName.toLowerCase().includes(searchText.toLowerCase())
-    })
-    console.log(newArray)
-    setFilteredProducts(newArray)
+    try {
+      let responseJson = {}
+      let response = {}
+      if (lastCategory === 'All') {
+        response = await fetch(
+          `${process.env.REACT_APP_API_URL}/items?query=${searchText}`
+        )
+      } else if (lastCategory !== 'All') {
+        response = await fetch(
+          `${process.env.REACT_APP_API_URL}/items?category=${lastCategory}&query=${searchText}`
+        )
+      }
+      responseJson = await response.json()
+      if (!responseJson.success) {
+        setLastCategory(lastCategory)
+        setFilteredProducts([])
+        return
+      }
+      setFilteredProducts(responseJson.data)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  const filterByCategorie = (category) => {
+  const filterByCategory = async (category) => {
     if (lastCategory !== '') {
       const lastClicked = document.getElementById(lastCategory)
       lastClicked.classList.remove('filter-category-button-active')
@@ -50,16 +67,28 @@ const Shop = () => {
     const buttonClicked = document.getElementById(category)
     buttonClicked.classList.remove('filter-category-button')
     buttonClicked.classList.add('filter-category-button-active')
-    const newArray = inventory.filter((item) => {
+
+    try {
+      let responseJson = {}
+      let response = {}
       if (category === 'All') {
-        return true
-      } else if (item.category === category) {
-        return true
+        response = await fetch(process.env.REACT_APP_API_URL + '/items')
+      } else if (category !== 'All') {
+        response = await fetch(
+          `${process.env.REACT_APP_API_URL}/items?category=${category}`
+        )
       }
-      return false
-    })
-    setLastCategory(category)
-    setFilteredProducts(newArray)
+      responseJson = await response.json()
+      if (!responseJson.success) {
+        setLastCategory(category)
+        setFilteredProducts([])
+        return
+      }
+      setLastCategory(category)
+      setFilteredProducts(responseJson.data)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -77,15 +106,21 @@ const Shop = () => {
       <div className='shop-filter-products-container'>
         <Filter
           showCategories={showCategories}
-          filter={filterByCategorie}
+          filter={filterByCategory}
           search={handleSearch}
           searchText={searchText}
           setSearchText={setSearchText}
         />
-        <ProductsContainer
-          products={filteredProducts}
-          handleAddToCart={handleAddToCart}
-        />
+        {filteredProducts.length === 0 ? (
+          <div id='no-results' className='shop-no-results-container'>
+            No results for Your search!
+          </div>
+        ) : (
+          <ProductsContainer
+            products={filteredProducts}
+            handleAddToCart={handleAddToCart}
+          />
+        )}
       </div>
       <CustomSnackbar
         open={openSnackbar}

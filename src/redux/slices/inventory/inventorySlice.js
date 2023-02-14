@@ -1,7 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-const url = 'https://pug-store-api.onrender.com/api/items'
-
 const initialState = {
   inventory: [],
   status: 'idle',
@@ -12,7 +10,7 @@ export const fetchInventory = createAsyncThunk(
   'inventory/fetchInventory',
   async () => {
     try {
-      const response = await fetch(url)
+      const response = await fetch(process.env.REACT_APP_API_URL + '/items')
       const myJson = await response.json()
       return myJson
     } catch (error) {
