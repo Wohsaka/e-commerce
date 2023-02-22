@@ -22,7 +22,7 @@ const NavBar = (props) => {
   const { window } = props
   const [mobileOpen, setMobileOpen] = React.useState(false)
   const [lastItem, setLastItem] = React.useState('')
-  const isLogged = useSelector((state) => state.user.isLogged)
+  const { isLogged, role } = useSelector((state) => state.user)
   const dispatch = useDispatch()
   let navigate = useNavigate()
 
@@ -34,6 +34,10 @@ const NavBar = (props) => {
     isLogged ? 'Log out' : 'Log in/Sign Up',
   ]
   isLogged && navItems.push('Shopping History')
+  if (role === 'a') {
+    navItems.push('Add Item')
+    navItems.push('Modify Items')
+  }
 
   const handleLogOut = () => {
     dispatch(resetCart())

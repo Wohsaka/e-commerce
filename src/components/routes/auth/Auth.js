@@ -39,7 +39,13 @@ const Auth = () => {
         console.log(data.message)
         return
       }
-      dispatch(userLoggedIn({ email, accessToken: data.data.accessToken }))
+      dispatch(
+        userLoggedIn({
+          email,
+          accessToken: data.data.accessToken,
+          role: data.data.role,
+        })
+      )
       navigate('/Shop', { replace: true })
       setEmail('')
       setPassword('')
@@ -67,7 +73,13 @@ const Auth = () => {
         console.log(data.message)
         return
       }
-      dispatch(userLoggedIn({ email, accessToken: data.data.accessToken }))
+      dispatch(
+        userLoggedIn({
+          email,
+          accessToken: data.data.accessToken,
+          role: data.data.role,
+        })
+      )
       navigate('/Shop', { replace: true })
       setEmail('')
       setPassword('')

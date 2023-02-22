@@ -1,0 +1,37 @@
+.add-item-container {
+  margin-top: 15vh;
+  display: flex !important;
+  flex-direction: column;
+  background-color: var(--white);
+  width: 90% !important;
+  padding: 1em;
+  border-radius: 3px;
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.15);
+}
+
+.add-item-container-row {
+  display: flex !important;
+  justify-content: space-around;
+  margin-top: 1em;
+}
+
+.add-item-add-item-button {
+  margin-top: 1em !important;
+  background-color: var(--orange) !important;
+}
+
+@media screen and (min-width: 768px) {
+  .add-item-container {
+    margin-top: 20vh;
+    width: 60% !important;
+    padding: 1.5em 3em !important;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .add-item-container {
+    margin-top: 20vh;
+    width: 40% !important;
+    padding: 1.5em 5em !important;
+  }
+}
