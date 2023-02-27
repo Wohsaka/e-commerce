@@ -1,0 +1,17 @@
+.modify-items-container {
+  padding: 10vh 1em 0 1em;
+  display: flex;
+  align-items: center;
+  height: 90vh;
+}
+
+@media screen and (min-width: 768px) {
+  .modify-items-container {
+    padding-top: 0;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .modify-items-container {
+    padding-top: 12vh;
+  }
+}

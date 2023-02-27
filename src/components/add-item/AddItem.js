@@ -34,7 +34,7 @@ const categories = [
   },
 ]
 
-const AddItem = () => {
+const AddItem = (props) => {
   const [itemData, setItemData] = React.useState({
     name: '',
     price: 0.0,
@@ -70,11 +70,20 @@ const AddItem = () => {
           authorization: accessToken,
         },
       }
-      await axios.post(
-        process.env.REACT_APP_API_URL + '/items',
-        itemData,
-        config
-      )
+      if (props.isPutRequest) {
+        await axios.put(
+          process.env.REACT_APP_API_URL + '/items?itemId=' + props.item.id,
+          itemData,
+          config
+        )
+        props.onUpdate()
+      } else {
+        await axios.post(
+          process.env.REACT_APP_API_URL + '/items',
+          itemData,
+          config
+        )
+      }
       setItemData({
         name: '',
         price: 0.0,
@@ -90,8 +99,51 @@ const AddItem = () => {
     }
   }
 
+  const handleDeleteItem = async () => {
+    try {
+      const config = {
+        headers: {
+          authorization: accessToken,
+        },
+      }
+      await axios.delete(
+        process.env.REACT_APP_API_URL + '/items?itemId=' + props.item.id,
+        config
+      )
+      props.onUpdate()
+
+      setItemData({
+        name: '',
+        price: 0.0,
+        category: categories[0].value,
+        id: '',
+        img: '',
+        description: '',
+      })
+      alert('Item delete successfuly!')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  React.useEffect(() => {
+    if (props.item) {
+      setItemData({
+        name: props.item.product_name,
+        price: parseFloat(props.item.product_price),
+        category: props.item.category.toLowerCase(),
+        id: props.item.product_id,
+        img: props.item.product_img,
+        description: props.item.product_description,
+      })
+    }
+  }, [])
+
   return (
-    <Container className='add-item-container'>
+    <Container
+      className='add-item-container'
+      sx={{ marginTop: { desktop: '8vh' } }}
+    >
       <Typography variant='h5'>Item info</Typography>
       <TextField
         error={itemData.name === '' ? true : false}
@@ -160,13 +212,24 @@ const AddItem = () => {
         value={itemData.description}
         onChange={handleChangeItemData}
       />
-      <Button
-        variant='contained'
-        onClick={handleAddItem}
-        className='add-item-add-item-button'
-      >
-        Add item
-      </Button>
+      <div className='add-item-buttons-container'>
+        <Button
+          variant='contained'
+          onClick={handleAddItem}
+          className='add-item-add-item-button'
+        >
+          Add item
+        </Button>
+        {props.isPutRequest ? (
+          <Button
+            variant='contained'
+            className='add-item-delete-button'
+            onClick={handleDeleteItem}
+          >
+            Delete
+          </Button>
+        ) : null}
+      </div>
     </Container>
   )
 }

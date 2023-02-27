@@ -8,7 +8,8 @@ import Cart from './components/routes/cart/Cart'
 import Auth from './components/routes/auth/Auth'
 import About from './components/routes/about/About'
 import ShoppingRecord from './components/routes/shopping-record/ShoppingRecord'
-import AddItem from './components/routes/add-item/AddItem'
+import AddItemRoute from './components/routes/add-item-route/AddItemRoute'
+import ModifyItems from './components/routes/modify-item/ModifyItems'
 import reportWebVitals from './reportWebVitals'
 import { Routes, Route, HashRouter } from 'react-router-dom'
 import store from './redux/store'
@@ -40,7 +41,8 @@ root.render(
             <Route path='Log%20in/Sign%20Up' element={<Auth />} />
             <Route path='/About' element={<About />} />
             <Route path='Shopping%20History' element={<ShoppingRecord />} />
-            <Route path='Add%20Item' element={<AddItem />} />
+            <Route path='Add%20Item' element={<AddItemRoute />} />
+            <Route path='Modify%20Items' element={<ModifyItems />} />
           </Routes>
         </ThemeProvider>
       </HashRouter>
