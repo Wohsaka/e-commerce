@@ -5,7 +5,7 @@ import AddItem from '../../add-item/AddItem'
 const AddItemRoute = () => {
   return (
     <Container>
-      <AddItem />
+      <AddItem containerStyle={{ marginTop: { desktop: '12vh' } }} />
     </Container>
   )
 }

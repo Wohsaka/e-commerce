@@ -39,7 +39,12 @@ const ModifyItems = () => {
     <div className='modify-items-container'>
       <ItemsTable items={items} onItemClick={handleItemClick} />
       <Modal open={isModalOpen} onClose={handleClose}>
-        <AddItem item={itemToModify} isPutRequest={true} onUpdate={getItems} />
+        <AddItem
+          item={itemToModify}
+          isPutRequest={true}
+          onUpdate={getItems}
+          containerStlye={{ marginTop: { desktop: '5vh' } }}
+        />
       </Modal>
     </div>
   )

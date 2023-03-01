@@ -20,14 +20,25 @@ import {
   minusOne,
   resetCart,
 } from '../../../redux/slices/cart/cartSlice'
+import CustomDialog from '../../custom-dialog/CustomDialog'
 const axios = require('axios').default
 
 const Cart = () => {
   const dispatch = useDispatch()
+  const [errorMsg, setErrorMsg] = React.useState('Error')
+  const [openDialog, setOpenDialog] = React.useState(false)
   const { items, total } = useSelector((state) => state.cart)
   const { isLogged, email, accessToken } = useSelector((state) => state.user)
   const [openBackdrop, setOpenBackdrop] = React.useState(false)
   const [openSnackbar, setOpenSnackbar] = React.useState(false)
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true)
+  }
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false)
+  }
 
   const recordPucharse = async () => {
     if (isLogged) {
@@ -55,11 +66,13 @@ const Cart = () => {
       } catch (error) {
         dispatch(resetCart())
         setOpenBackdrop(false)
-        alert(error.message)
+        setErrorMsg(error.message)
+        handleOpenDialog()
         console.log(error)
       }
     } else {
-      alert('You must be logged in to acces this feature!')
+      setErrorMsg('You must be logged in to acces this feature!')
+      handleOpenDialog()
     }
   }
 
@@ -155,6 +168,11 @@ const Cart = () => {
         open={openSnackbar}
         text='Satisfactory purchase!'
         setOpen={setOpenSnackbar}
+      />
+      <CustomDialog
+        open={openDialog}
+        text={errorMsg}
+        onClose={handleCloseDialog}
       />
     </Box>
   )

@@ -6,8 +6,11 @@ import { fetchInventory } from '../../../redux/slices/inventory/inventorySlice'
 import { addToCart } from '../../../redux/slices/cart/cartSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import CustomSnackbar from '../../customSnackbar/CustomSnackbar'
+import CustomDialog from '../../custom-dialog/CustomDialog'
 
 const Shop = () => {
+  const [errorMsg, setErrorMsg] = React.useState('Error')
+  const [openDialog, setOpenDialog] = React.useState(false)
   const [showCategories, setShowCategories] = useState(false)
   const [filteredProducts, setFilteredProducts] = useState([])
   const [searchText, setSearchText] = useState('')
@@ -19,12 +22,21 @@ const Shop = () => {
   const isLogged = useSelector((state) => state.user.isLogged)
   const dispatch = useDispatch()
 
+  const handleOpenDialog = () => {
+    setOpenDialog(true)
+  }
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false)
+  }
+
   const handleAddToCart = (item) => {
     if (isLogged) {
       dispatch(addToCart(item))
       setOpenSnackbar(true)
     } else {
-      alert('You need to be logged in to add items to your cart')
+      setErrorMsg('You need to be logged in to add items to your cart')
+      handleOpenDialog()
     }
   }
 
@@ -126,6 +138,11 @@ const Shop = () => {
         open={openSnackbar}
         text='Item added to your cart!'
         setOpen={setOpenSnackbar}
+      />
+      <CustomDialog
+        open={openDialog}
+        text={errorMsg}
+        onClose={handleCloseDialog}
       />
     </div>
   )

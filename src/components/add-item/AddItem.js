@@ -9,6 +9,7 @@ import React from 'react'
 import './style.css'
 import isUrl from 'is-url'
 import { useSelector } from 'react-redux'
+import CustomDialog from '../custom-dialog/CustomDialog'
 const axios = require('axios').default
 
 const categories = [
@@ -35,6 +36,8 @@ const categories = [
 ]
 
 const AddItem = (props) => {
+  const [errorMsg, setErrorMsg] = React.useState('Error')
+  const [openDialog, setOpenDialog] = React.useState(false)
   const [itemData, setItemData] = React.useState({
     name: '',
     price: 0.0,
@@ -44,6 +47,14 @@ const AddItem = (props) => {
     description: '',
   })
   const accessToken = useSelector((state) => state.user.accessToken)
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true)
+  }
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false)
+  }
 
   const handleChangeItemData = (e) => {
     setItemData((prevState) => ({
@@ -61,7 +72,8 @@ const AddItem = (props) => {
       }
     })
     if (blank) {
-      alert('Item data must not have blank fields!')
+      setErrorMsg('Item data must not have blank fields!')
+      handleOpenDialog()
       return
     }
     try {
@@ -92,10 +104,12 @@ const AddItem = (props) => {
         img: '',
         description: '',
       })
-      alert('Item added nicely :)!')
+      setErrorMsg('Item added nicely :)!')
+      handleOpenDialog()
     } catch (error) {
       console.log(error)
-      alert('Error adding item')
+      setErrorMsg('Error adding item')
+      handleOpenDialog()
     }
   }
 
@@ -120,7 +134,8 @@ const AddItem = (props) => {
         img: '',
         description: '',
       })
-      alert('Item delete successfuly!')
+      setErrorMsg('Item delete successfuly!')
+      handleOpenDialog()
     } catch (error) {
       console.log(error)
     }
@@ -140,10 +155,7 @@ const AddItem = (props) => {
   }, [])
 
   return (
-    <Container
-      className='add-item-container'
-      sx={{ marginTop: { desktop: '8vh' } }}
-    >
+    <Container className='add-item-container' sx={props.containerStyle}>
       <Typography variant='h5'>Item info</Typography>
       <TextField
         error={itemData.name === '' ? true : false}
@@ -230,6 +242,11 @@ const AddItem = (props) => {
           </Button>
         ) : null}
       </div>
+      <CustomDialog
+        open={openDialog}
+        text={errorMsg}
+        onClose={handleCloseDialog}
+      />
     </Container>
   )
 }

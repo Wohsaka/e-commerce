@@ -11,9 +11,12 @@ import {
 import { userLoggedIn } from '../../../redux/slices/user/userSlice'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import CustomDialog from '../../custom-dialog/CustomDialog'
 const axios = require('axios').default
 
 const Auth = () => {
+  const [errorMsg, setErrorMsg] = React.useState('Error')
+  const [openDialog, setOpenDialog] = React.useState(false)
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [signOrLog, setSignOrLog] = React.useState(true)
@@ -22,6 +25,14 @@ const Auth = () => {
 
   //Redux
   const dispatch = useDispatch()
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true)
+  }
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false)
+  }
 
   const signUp = async () => {
     try {
@@ -35,7 +46,8 @@ const Auth = () => {
       )
       if (!data.success) {
         setLoading(false)
-        alert(data.message)
+        setErrorMsg(data.message)
+        handleOpenDialog()
         console.log(data.message)
         return
       }
@@ -52,7 +64,8 @@ const Auth = () => {
       setLoading(false)
     } catch (error) {
       console.log(error)
-      alert(error.message)
+      setErrorMsg(error.message)
+      handleOpenDialog()
       setLoading(false)
     }
   }
@@ -69,7 +82,8 @@ const Auth = () => {
       )
       if (!data.success) {
         setLoading(false)
-        alert(data.message)
+        setErrorMsg(data.message)
+        handleOpenDialog()
         console.log(data.message)
         return
       }
@@ -86,7 +100,8 @@ const Auth = () => {
       setLoading(false)
     } catch (error) {
       console.log(error)
-      alert(error.message)
+      setErrorMsg(error.message)
+      handleOpenDialog()
       setLoading(false)
     }
   }
@@ -151,6 +166,11 @@ const Auth = () => {
           </Button>
         </Box>
       </Box>
+      <CustomDialog
+        open={openDialog}
+        text={errorMsg}
+        onClose={handleCloseDialog}
+      />
     </Box>
   )
 }

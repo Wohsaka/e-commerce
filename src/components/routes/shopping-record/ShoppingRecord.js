@@ -4,14 +4,25 @@ import * as React from 'react'
 import './style.css'
 import { useSelector } from 'react-redux'
 import CustomTable from '../../customTable/CustomTable'
+import CustomDialog from '../../custom-dialog/CustomDialog'
 const axios = require('axios').default
 
 const ShoppingRecord = () => {
   const { email, accessToken } = useSelector((state) => state.user)
+  const [errorMsg, setErrorMsg] = React.useState('Error')
+  const [openDialog, setOpenDialog] = React.useState(false)
   const [loading, setLoading] = React.useState(true)
   const [recordPages, setRecordPages] = React.useState([])
   const [openBackdrop, setOpenBackdrop] = React.useState(false)
   const [pucharse, setPucharse] = React.useState({})
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true)
+  }
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false)
+  }
 
   const closeBackdrop = () => {
     setOpenBackdrop(false)
@@ -49,7 +60,8 @@ const ShoppingRecord = () => {
         })
     } catch (error) {
       setLoading(false)
-      alert(error.message)
+      setErrorMsg(error.message)
+      handleOpenDialog()
       console.log(error)
     }
   }
@@ -80,6 +92,11 @@ const ShoppingRecord = () => {
           <CustomTable pages={recordPages} render={renderPucharse} />
         </Box>
       )}
+      <CustomDialog
+        open={openDialog}
+        text={errorMsg}
+        onClose={handleCloseDialog}
+      />
     </Box>
   )
 }
